@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:live_tv/constant/app_colors.dart';
 import 'package:live_tv/constant/app_font.dart';
 import 'package:get/get.dart';
+import 'package:live_tv/constant/app_routes.dart';
 
 class HomePageScreen extends StatefulWidget {
   const HomePageScreen({Key? key}) : super(key: key);
@@ -21,8 +22,6 @@ class _HomePageScreenState extends State<HomePageScreen> {
           'Live TV',
           style: Font.title2(),
         ),
-        backgroundColor: const Color.fromARGB(255, 61, 57, 82),
-        centerTitle: true,
       ),
       body: Container(
         padding: const EdgeInsets.all(8),
@@ -62,7 +61,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                     )),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             Material(
@@ -72,11 +71,14 @@ class _HomePageScreenState extends State<HomePageScreen> {
               clipBehavior: Clip.antiAlias,
               borderRadius: BorderRadius.circular(8),
               child: InkWell(
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushNamed(context, AppRoutes.categoryScreen);
+                },
                 child: Container(
                   width: Get.width * 0.3,
                   alignment: Alignment.center,
-                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                   child: Text(
                     'Start',
                     style: Font.button1(),

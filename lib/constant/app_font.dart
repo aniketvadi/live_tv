@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+// ignore: depend_on_referenced_packages
 import 'package:google_fonts/google_fonts.dart';
 
 class Font {
@@ -10,6 +11,9 @@ class Font {
 
   static subTitle1({Color color = Colors.white}) =>
       TextStyle(fontSize: 18, color: color, fontWeight: FontWeight.w400);
+
+  static subTitle2({Color color = Colors.white}) =>
+      TextStyle(fontSize: 17, color: color, fontWeight: FontWeight.w400);
 
   static button1({Color color = Colors.white}) =>
       TextStyle(fontSize: 18, color: color, fontWeight: FontWeight.w500);

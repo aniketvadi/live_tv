@@ -1,13 +1,20 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:live_tv/constant/app_colors.dart';
 
 // ignore: depend_on_referenced_packages
 import 'package:live_tv/constant/app_routes.dart';
+import 'package:live_tv/constant/firebase_option.dart';
 import 'package:live_tv/screen/category_screen.dart';
 import 'package:live_tv/screen/home_screen.dart';
 import 'package:live_tv/screen/splash_screen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: FireBaseOption.option,
+  );
   runApp(const MyApp());
 }
 
@@ -16,7 +23,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Live TV',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(

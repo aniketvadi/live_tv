@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "20212579152",
+    "project_id": "live-tv-c5e8b",
+    "storage_bucket": "live-tv-c5e8b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:20212579152:android:f6b0534220d5d8c7f28a55",
+        "android_client_info": {
+          "package_name": "com.crystal.live_tv"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "20212579152-e2bc042s54s4l9d7vpqdpdfadtklm09o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzVsuAvgBWMIRu-GoeclN2fZEugo1-Moo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "20212579152-e2bc042s54s4l9d7vpqdpdfadtklm09o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

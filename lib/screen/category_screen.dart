@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:live_tv/constant/app_colors.dart';
 import 'package:live_tv/constant/app_font.dart';
+import 'package:live_tv/controller/fire_base_controller.dart';
 
 class CategoryScreen extends StatefulWidget {
   const CategoryScreen({super.key});
@@ -10,6 +12,16 @@ class CategoryScreen extends StatefulWidget {
 }
 
 class _CategoryScreenState extends State<CategoryScreen> {
+  final controller = Get.isRegistered<FirebaseController>()
+      ? Get.find<FirebaseController>()
+      : Get.put(FirebaseController());
+
+  @override
+  void initState() {
+    super.initState();
+    controller.getCategory();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,23 +45,19 @@ class _CategoryScreenState extends State<CategoryScreen> {
           itemBuilder: (context, index) {
             return Container(
               margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
-              padding: EdgeInsets.all(4),
+              padding: const EdgeInsets.all(4),
               decoration: BoxDecoration(
-                color: AppColor.primary,
-                borderRadius: BorderRadius.circular(10),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.shade300,
-                    blurRadius: 2,
-                    spreadRadius: -1,
-                    
-                  )
-                ]
-              ),
+                  color: AppColor.primary,
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.shade300,
+                      blurRadius: 2,
+                      spreadRadius: -1,
+                    )
+                  ]),
               child: ListTile(
-                onTap: () {
-                  
-                },
+                onTap: () {},
                 leading: CircleAvatar(
                   radius: 18,
                   child: Text(
@@ -64,7 +72,11 @@ class _CategoryScreenState extends State<CategoryScreen> {
                     style: Font.subTitle1(),
                   ),
                 ),
-                trailing: Icon(Icons.navigate_next,color: AppColor.white,size: 26,),
+                trailing: Icon(
+                  Icons.navigate_next,
+                  color: AppColor.white,
+                  size: 26,
+                ),
               ),
             );
           },

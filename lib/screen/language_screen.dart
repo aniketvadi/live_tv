@@ -2,17 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:live_tv/constant/app_colors.dart';
 import 'package:live_tv/constant/app_font.dart';
-import 'package:live_tv/constant/app_routes.dart';
 import 'package:live_tv/controller/fire_base_controller.dart';
 
-class CategoryScreen extends StatefulWidget {
-  const CategoryScreen({super.key});
+class LanguageScreen extends StatefulWidget {
+  const LanguageScreen({super.key});
 
   @override
-  State<CategoryScreen> createState() => _CategoryScreenState();
+  State<LanguageScreen> createState() => _LanguageScreenState();
 }
 
-class _CategoryScreenState extends State<CategoryScreen> {
+class _LanguageScreenState extends State<LanguageScreen> {
   final controller = Get.isRegistered<FirebaseController>()
       ? Get.find<FirebaseController>()
       : Get.put(FirebaseController());
@@ -20,7 +19,6 @@ class _CategoryScreenState extends State<CategoryScreen> {
   @override
   void initState() {
     super.initState();
-    controller.getCategory();
   }
 
   @override
@@ -42,14 +40,14 @@ class _CategoryScreenState extends State<CategoryScreen> {
           ],
         )),
         child: Obx(
-          () => controller.categoryList.isEmpty
+          () => controller.languageList.isEmpty
               ? const Center(
                   child: CircularProgressIndicator(),
                 )
               : ListView.builder(
                   itemCount: controller.categoryList.length,
                   itemBuilder: (context, index) {
-                    var element = controller.categoryList[index];
+                    var element = controller.languageList[index];
                     return Container(
                       margin: const EdgeInsets.symmetric(
                           horizontal: 10, vertical: 12),
@@ -65,9 +63,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                             )
                           ]),
                       child: ListTile(
-                        onTap: () {
-                          Navigator.pushNamed(context, AppRoutes.languageScreen);
-                        },
+                        onTap: () {},
                         leading: CircleAvatar(
                           radius: 18,
                           child: Text(

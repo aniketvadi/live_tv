@@ -4,17 +4,15 @@ import 'package:live_tv/modal/category_modal.dart';
 
 class FirebaseController extends GetxController {
   var categoryList = <CategoryModal>[].obs;
+  final FirebaseFirestore _db = FirebaseFirestore.instance;
 
   Future<void> getCategory() async {
-    var querySnapshot =
-        await FirebaseFirestore.instance.collection('category').get();
-        print(querySnapshot.docs[0]);
+    QuerySnapshot<Map<String, dynamic>> querySnapshot =
+        await _db.collection('category').get();
 
-    // var list =
-    //     querySnapshot.docs.map((doc) => CategoryModal.fromJson(doc)).toList();
+    List<CategoryModal> list =
+        querySnapshot.docs.map((doc) => CategoryModal.fromJson(doc)).toList();
 
-    // if (categoryList.isEmpty) {
-    //   categoryList.value = list;
-    // }
+    categoryList.value = list;
   }
 }

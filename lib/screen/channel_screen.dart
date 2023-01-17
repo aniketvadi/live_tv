@@ -5,14 +5,14 @@ import 'package:live_tv/constant/app_font.dart';
 import 'package:live_tv/constant/app_routes.dart';
 import 'package:live_tv/controller/fire_base_controller.dart';
 
-class CategoryScreen extends StatefulWidget {
-  const CategoryScreen({super.key});
+class ChannelScreen extends StatefulWidget {
+  const ChannelScreen({super.key});
 
   @override
-  State<CategoryScreen> createState() => _CategoryScreenState();
+  State<ChannelScreen> createState() => ChannelScreenState();
 }
 
-class _CategoryScreenState extends State<CategoryScreen> {
+class ChannelScreenState extends State<ChannelScreen> {
   final controller = Get.isRegistered<FirebaseController>()
       ? Get.find<FirebaseController>()
       : Get.put(FirebaseController());
@@ -20,7 +20,6 @@ class _CategoryScreenState extends State<CategoryScreen> {
   @override
   void initState() {
     super.initState();
-    controller.getCategory();
   }
 
   @override
@@ -28,7 +27,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Category',
+          'Channel',
           style: Font.title2(),
         ),
       ),
@@ -42,14 +41,14 @@ class _CategoryScreenState extends State<CategoryScreen> {
           ],
         )),
         child: Obx(
-          () => controller.categoryList.isEmpty
+          () => controller.channelList.isEmpty
               ? const Center(
                   child: CircularProgressIndicator(),
                 )
               : ListView.builder(
-                  itemCount: controller.categoryList.length,
+                  itemCount: controller.channelList.length,
                   itemBuilder: (context, index) {
-                    var element = controller.categoryList[index];
+                    var element = controller.channelList[index];
                     return Container(
                       margin: const EdgeInsets.symmetric(
                           horizontal: 10, vertical: 12),
@@ -66,7 +65,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
                           ]),
                       child: ListTile(
                         onTap: () {
-                          Navigator.pushNamed(context, AppRoutes.languageScreen);
+                          controller.getSchedual(channel: element);
+                          Navigator.pushNamed(
+                              context, AppRoutes.schedualScreen);
                         },
                         leading: CircleAvatar(
                           radius: 18,

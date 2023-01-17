@@ -7,9 +7,11 @@ import 'package:live_tv/constant/app_colors.dart';
 import 'package:live_tv/constant/app_routes.dart';
 import 'package:live_tv/constant/firebase_option.dart';
 import 'package:live_tv/screen/category_screen.dart';
+import 'package:live_tv/screen/channel_screen.dart';
 import 'package:live_tv/screen/home_screen.dart';
 import 'package:live_tv/screen/language_screen.dart';
 import 'package:live_tv/screen/splash_screen.dart';
+import 'package:live_tv/screen/view_schedual_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -52,6 +54,8 @@ class MyApp extends StatelessWidget {
         AppRoutes.homeScreen: (context) => const HomePageScreen(),
         AppRoutes.categoryScreen: (context) => const CategoryScreen(),
         AppRoutes.languageScreen: (context) => const LanguageScreen(),
+        AppRoutes.channelScreen: (context) => const ChannelScreen(),
+        AppRoutes.schedualScreen: (context) => const SchedualView(),
       },
     );
   }

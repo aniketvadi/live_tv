@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:live_tv/constant/app_colors.dart';
 import 'package:live_tv/constant/app_font.dart';
+import 'package:live_tv/constant/app_routes.dart';
 import 'package:live_tv/controller/fire_base_controller.dart';
 
 class LanguageScreen extends StatefulWidget {
@@ -26,7 +27,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Category',
+          'Language',
           style: Font.title2(),
         ),
       ),
@@ -39,55 +40,51 @@ class _LanguageScreenState extends State<LanguageScreen> {
             Color.fromARGB(255, 43, 40, 68),
           ],
         )),
-        child: Obx(
-          () => controller.languageList.isEmpty
-              ? const Center(
-                  child: CircularProgressIndicator(),
-                )
-              : ListView.builder(
-                  itemCount: controller.categoryList.length,
-                  itemBuilder: (context, index) {
-                    var element = controller.languageList[index];
-                    return Container(
-                      margin: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 12),
-                      padding: const EdgeInsets.all(4),
-                      decoration: BoxDecoration(
-                          color: AppColor.primary,
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.shade300,
-                              blurRadius: 2,
-                              spreadRadius: -1,
+        child: Obx(() => controller.languageList.isEmpty
+            ? const Center(
+                child: CircularProgressIndicator(),
+              )
+            : GridView.builder(
+                itemCount: controller.languageList.length,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 3.0,
+                    mainAxisSpacing: 5.0,
+                    childAspectRatio: 1.4),
+                itemBuilder: (context, index) {
+                  var element = controller.languageList[index];
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Material(
+                      color: AppColor.primary,
+                      borderRadius: BorderRadius.circular(10),
+                      elevation: 3.0,
+                      clipBehavior: Clip.antiAlias,
+                      child: InkWell(
+                        onTap: () {
+                          controller.getChannelBylanguage(lang: element);
+                          Navigator.pushNamed(context, AppRoutes.channelScreen);
+                        },
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            CircleAvatar(
+                                radius: 40,
+                                child: Text(
+                                  element[0],
+                                  style: Font.title1(),
+                                )),
+                            Text(
+                              element,
+                              style: Font.subTitle1(),
                             )
-                          ]),
-                      child: ListTile(
-                        onTap: () {},
-                        leading: CircleAvatar(
-                          radius: 18,
-                          child: Text(
-                            '${index + 1}',
-                            style: Font.subTitle2(),
-                          ),
-                        ),
-                        title: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
-                          child: Text(
-                            element,
-                            style: Font.subTitle1(),
-                          ),
-                        ),
-                        trailing: Icon(
-                          Icons.navigate_next,
-                          color: AppColor.white,
-                          size: 26,
+                          ],
                         ),
                       ),
-                    );
-                  },
-                ),
-        ),
+                    ),
+                  );
+                },
+              )),
       ),
     );
   }

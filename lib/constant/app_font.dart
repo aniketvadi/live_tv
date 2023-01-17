@@ -15,6 +15,9 @@ class Font {
   static subTitle2({Color color = Colors.white}) =>
       TextStyle(fontSize: 17, color: color, fontWeight: FontWeight.w400);
 
+  static subTitle3({Color color = Colors.white}) =>
+      TextStyle(fontSize: 16, color: color, fontWeight: FontWeight.w400);
+
   static button1({Color color = Colors.white}) =>
       TextStyle(fontSize: 18, color: color, fontWeight: FontWeight.w500);
 }

@@ -36,10 +36,12 @@ class FirebaseController extends GetxController {
   }
 
   Future<void> getChannelBylanguage({required String lang}) async {
+    channelList.value = [];
     channelList.value = await ApiImplement.getChannelApi(language: lang);
   }
 
   Future<void> getSchedual({required dynamic channel}) async {
+    schedualList.value = [];
     schedualList.value = await ApiImplement.getSchedualApi(channel: channel);
   }
 }

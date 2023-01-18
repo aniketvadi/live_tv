@@ -50,7 +50,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
                     crossAxisCount: 2,
                     crossAxisSpacing: 3.0,
                     mainAxisSpacing: 5.0,
-                    childAspectRatio: 1.4),
+                    childAspectRatio: 1.2),
                 itemBuilder: (context, index) {
                   var element = controller.languageList[index];
                   return Padding(
@@ -70,13 +70,17 @@ class _LanguageScreenState extends State<LanguageScreen> {
                           children: [
                             CircleAvatar(
                                 radius: 40,
+                                // backgroundColor:
+                                //     Color.fromARGB(255, 13, 12, 29),
                                 child: Text(
                                   element[0],
                                   style: Font.title1(),
                                 )),
                             Text(
                               element,
-                              style: Font.subTitle1(),
+                              style: Font.text(
+                                  size: 18,
+                                  weight: FontWeight.bold),
                             )
                           ],
                         ),

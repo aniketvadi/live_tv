@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class AppColor {
-  static Color primary = const Color.fromARGB(255, 61, 57, 82);
-  static Color secondary = Colors.blueGrey.shade700;
+  static Color primary = const Color.fromARGB(255, 13, 12, 29);
+  static Color secondary = const Color.fromARGB(255, 22, 22, 65);
   static Color white = Colors.white;
   static Color black = Colors.black;
 }

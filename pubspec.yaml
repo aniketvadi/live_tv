@@ -45,6 +45,7 @@ dependencies:
   url_launcher: ^6.1.7
   applovin_max: ^2.3.3
   google_mobile_ads: ^2.3.0
+  shimmer: ^2.0.0
 
 dev_dependencies:
   flutter_test:

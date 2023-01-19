@@ -11,6 +11,7 @@ class FirebaseController extends GetxController {
   var schedualList = <SchedualModal>[].obs;
   final FirebaseFirestore _db = FirebaseFirestore.instance;
   Rx<AllCategoryModal> allCategory = AllCategoryModal().obs;
+  RxBool isLoading = false.obs;
 
   // Future<void> getCategory() async {
   //   var querySnapshot =
@@ -26,6 +27,7 @@ class FirebaseController extends GetxController {
   // }
 
   Future<void> getCategory() async {
+    isLoading(true);
     allCategory.value = await ApiImplement.getCategoryApi();
     if (allCategory.value.categories != null) {
       categoryList.value = allCategory.value.categories!;
@@ -33,15 +35,20 @@ class FirebaseController extends GetxController {
     if (allCategory.value.languages != null) {
       languageList.value = allCategory.value.languages!;
     }
+    isLoading(false);
   }
 
   Future<void> getChannelBylanguage({required String lang}) async {
+    isLoading(true);
     channelList.value = [];
     channelList.value = await ApiImplement.getChannelApi(language: lang);
+    isLoading(false);
   }
 
   Future<void> getSchedual({required dynamic channel}) async {
+    isLoading(true);
     schedualList.value = [];
     schedualList.value = await ApiImplement.getSchedualApi(channel: channel);
+    isLoading(false);
   }
 }

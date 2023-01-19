@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Font {
-  static text({Color color = Colors.white,double size = 16,FontWeight? weight}) =>
+  static text(
+          {Color color = Colors.white, double size = 16, FontWeight? weight}) =>
       GoogleFonts.lato(fontSize: size, color: color, fontWeight: weight);
 
   static title1({Color color = Colors.white}) =>
@@ -23,6 +24,9 @@ class Font {
 
   static bodyText1({Color color = Colors.white}) =>
       TextStyle(fontSize: 15, color: color, fontWeight: FontWeight.w300);
+
+  static bodyText2({Color color = Colors.white}) =>
+      TextStyle(fontSize: 14, color: color, fontWeight: FontWeight.w300);
 
   static button1({Color color = Colors.white}) =>
       TextStyle(fontSize: 18, color: color, fontWeight: FontWeight.w500);

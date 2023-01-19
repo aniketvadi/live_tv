@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:live_tv/constant/app_colors.dart';
 import 'package:live_tv/constant/app_font.dart';
 import 'package:live_tv/controller/fire_base_controller.dart';
+import 'package:live_tv/custom_widget/list_loading.dart';
+import 'package:live_tv/custom_widget/no_data_found.dart';
 import 'package:timelines/timelines.dart';
 
 class SchedualView extends StatefulWidget {
@@ -27,18 +29,25 @@ class _SchedualViewState extends State<SchedualView> {
       ),
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+        decoration: const BoxDecoration(
+            gradient: LinearGradient(
+          colors: [
+            Color.fromARGB(255, 61, 57, 82),
+            Color.fromARGB(255, 43, 40, 68),
+          ],
+        )),
         child: Obx(
-          () => controller.schedualList.isEmpty
-              ? const Center(
-                  child: CircularProgressIndicator(),
-                )
-              : SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      timeTableWidget(context),
-                    ],
-                  ),
-                ),
+          () => controller.isLoading.value
+              ? const ListLoading()
+              : controller.schedualList.isEmpty
+                  ? const NoDatFound()
+                  : SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          timeTableWidget(context),
+                        ],
+                      ),
+                    ),
         ),
       ),
     );
@@ -52,10 +61,10 @@ class _SchedualViewState extends State<SchedualView> {
           theme: TimelineTheme.of(context).copyWith(
               nodePosition: 0.2,
               indicatorPosition: 0.1,
-              connectorTheme: const ConnectorThemeData(
-                  color: Colors.black54, thickness: 1.2),
+              connectorTheme:
+                  const ConnectorThemeData(color: Colors.white, thickness: 1.2),
               indicatorTheme:
-                  const IndicatorThemeData(color: Colors.black54, size: 8)),
+                  const IndicatorThemeData(color: Colors.white, size: 8)),
           builder: TimelineTileBuilder.connectedFromStyle(
             contentsAlign: ContentsAlign.basic,
             itemCount: controller.schedualList.length,
@@ -85,29 +94,29 @@ class _SchedualViewState extends State<SchedualView> {
                   children: [
                     Text(
                       data.name ?? '',
-                      style: Font.subTitle1(),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 8, vertical: 5),
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                          color: Colors.teal,
-                          borderRadius: BorderRadius.circular(10)),
-                      child: Text(
-                        data.type ?? '',
-                        style: Font.subTitle3(),
-                      ),
+                      style: Font.text(size: 18),
                     ),
                     const SizedBox(
                       height: 10,
                     ),
                     Text(
                       data.otheDetail ?? '',
-                      style: Font.bodyText1(),
+                      style: Font.bodyText2(),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 7, vertical: 4),
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                          color: Colors.teal,
+                          borderRadius: BorderRadius.circular(8)),
+                      child: Text(
+                        data.type ?? '',
+                        style: Font.bodyText2(),
+                      ),
                     ),
                   ],
                 ),

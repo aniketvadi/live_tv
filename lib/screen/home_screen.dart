@@ -7,6 +7,7 @@ import 'package:live_tv/constant/app_constant.dart';
 import 'package:live_tv/constant/app_font.dart';
 import 'package:get/get.dart';
 import 'package:live_tv/constant/app_routes.dart';
+import 'package:live_tv/test.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -96,7 +97,11 @@ class _HomePageScreenState extends State<HomePageScreen> {
                 borderRadius: BorderRadius.circular(8),
                 child: InkWell(
                   onTap: () {
-                    Navigator.pushNamed(context, AppRoutes.categoryScreen);
+                    // Navigator.pushNamed(context, AppRoutes.categoryScreen);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => NativeCodeTest()));
                   },
                   child: Container(
                     width: Get.width * 0.3,

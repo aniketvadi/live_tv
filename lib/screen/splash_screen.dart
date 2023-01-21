@@ -3,6 +3,7 @@ import 'package:live_tv/constant/app_colors.dart';
 import 'package:live_tv/constant/app_font.dart';
 import 'package:live_tv/constant/app_routes.dart';
 import 'package:live_tv/constant/img_path.dart';
+import 'package:live_tv/services/mobile_ad_helper.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -26,8 +27,9 @@ class _SplashScreenState extends State<SplashScreen>
         CurvedAnimation(parent: controller, curve: Curves.fastOutSlowIn);
     textAnimation =
         CurvedAnimation(parent: controller, curve: Curves.fastOutSlowIn);
-    controller.addListener(() {
+    controller.addListener(() async {
       if (controller.isCompleted) {
+        await AdHelper.initializeAdMobDataAPI();
         Navigator.pushNamedAndRemoveUntil(
             context, AppRoutes.homeScreen, (route) => false);
       }

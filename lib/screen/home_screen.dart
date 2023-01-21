@@ -97,11 +97,11 @@ class _HomePageScreenState extends State<HomePageScreen> {
                 borderRadius: BorderRadius.circular(8),
                 child: InkWell(
                   onTap: () {
-                    // Navigator.pushNamed(context, AppRoutes.categoryScreen);
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => NativeCodeTest()));
+                    Navigator.pushNamed(context, AppRoutes.categoryScreen);
+                    // Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //         builder: (context) => NativeCodeTest()));
                   },
                   child: Container(
                     width: Get.width * 0.3,

@@ -6,6 +6,7 @@ import 'package:live_tv/constant/app_routes.dart';
 import 'package:live_tv/controller/fire_base_controller.dart';
 import 'package:live_tv/custom_widget/list_loading.dart';
 import 'package:live_tv/custom_widget/no_data_found.dart';
+import 'package:live_tv/services/mobile_ad_helper.dart';
 
 class CategoryScreen extends StatefulWidget {
   const CategoryScreen({super.key});
@@ -34,6 +35,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
           style: Font.title2(),
         ),
       ),
+      bottomNavigationBar: AdHelper.bannerAdWidget(),
       body: Container(
         padding: const EdgeInsets.all(8),
         decoration: const BoxDecoration(
@@ -68,8 +70,14 @@ class _CategoryScreenState extends State<CategoryScreen> {
                               ]),
                           child: ListTile(
                             onTap: () {
-                              Navigator.pushNamed(
-                                  context, AppRoutes.languageScreen);
+                              try {
+                                AdHelper.showIntersrtitialAd();
+                                Navigator.pushNamed(
+                                    context, AppRoutes.languageScreen);
+                              } catch (e) {
+                                Navigator.pushNamed(
+                                    context, AppRoutes.languageScreen);
+                              }
                             },
                             leading: CircleAvatar(
                               radius: 18,

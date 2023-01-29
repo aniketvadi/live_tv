@@ -5,6 +5,7 @@ import 'package:live_tv/constant/app_font.dart';
 import 'package:live_tv/controller/fire_base_controller.dart';
 import 'package:live_tv/custom_widget/list_loading.dart';
 import 'package:live_tv/custom_widget/no_data_found.dart';
+import 'package:live_tv/services/mobile_ad_helper.dart';
 import 'package:timelines/timelines.dart';
 
 class SchedualView extends StatefulWidget {
@@ -27,6 +28,7 @@ class _SchedualViewState extends State<SchedualView> {
           style: Font.subTitle2(),
         ),
       ),
+      bottomNavigationBar: AdHelper.bannerAdWidget(),
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
         decoration: const BoxDecoration(

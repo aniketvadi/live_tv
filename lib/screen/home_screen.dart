@@ -7,7 +7,7 @@ import 'package:live_tv/constant/app_constant.dart';
 import 'package:live_tv/constant/app_font.dart';
 import 'package:get/get.dart';
 import 'package:live_tv/constant/app_routes.dart';
-import 'package:live_tv/test.dart';
+import 'package:live_tv/services/mobile_ad_helper.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -37,6 +37,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
           style: Font.title2(),
         ),
       ),
+      bottomNavigationBar: AdHelper.bannerAdWidget(),
       body: WillPopScope(
         onWillPop: () => _showExitDialog(),
         child: Container(
@@ -96,8 +97,14 @@ class _HomePageScreenState extends State<HomePageScreen> {
                 clipBehavior: Clip.antiAlias,
                 borderRadius: BorderRadius.circular(8),
                 child: InkWell(
-                  onTap: () {
-                    Navigator.pushNamed(context, AppRoutes.categoryScreen);
+                  onTap: () async {
+                    try {
+                      AdHelper.showIntersrtitialAd();
+                      Navigator.pushNamed(context, AppRoutes.categoryScreen);
+                    } catch (e) {
+                      Navigator.pushNamed(context, AppRoutes.categoryScreen);
+                    }
+
                     // Navigator.push(
                     //     context,
                     //     MaterialPageRoute(

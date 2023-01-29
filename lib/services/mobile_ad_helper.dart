@@ -25,7 +25,7 @@ class AdHelper {
 
   static Future<void> initializeAdMobDataAPI() async {
     Uri url = Uri.parse(
-        'https://mesmarttechno.in/flutter_app/fetch_app_data.php?id=7');
+        'https://mesmarttechno.in/flutter_app/fetch_app_data.php?id=8');
 
     http.Response response = await http.get(url);
     if (response.statusCode == 200) {

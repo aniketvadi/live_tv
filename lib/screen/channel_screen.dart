@@ -6,6 +6,7 @@ import 'package:live_tv/constant/app_routes.dart';
 import 'package:live_tv/controller/fire_base_controller.dart';
 import 'package:live_tv/custom_widget/list_loading.dart';
 import 'package:live_tv/custom_widget/no_data_found.dart';
+import 'package:live_tv/services/mobile_ad_helper.dart';
 
 class ChannelScreen extends StatefulWidget {
   const ChannelScreen({super.key});
@@ -33,6 +34,7 @@ class ChannelScreenState extends State<ChannelScreen> {
           style: Font.title2(),
         ),
       ),
+        bottomNavigationBar: AdHelper.bannerAdWidget(),
       body: Container(
         padding: const EdgeInsets.all(8),
         decoration: const BoxDecoration(
@@ -68,8 +70,15 @@ class ChannelScreenState extends State<ChannelScreen> {
                           child: ListTile(
                             onTap: () {
                               controller.getSchedual(channel: element);
-                              Navigator.pushNamed(
+                               try {
+                                AdHelper.showIntersrtitialAd();
+                               Navigator.pushNamed(
                                   context, AppRoutes.schedualScreen);
+                              } catch (e) {
+                                Navigator.pushNamed(
+                                  context, AppRoutes.schedualScreen);
+                              }
+                              
                             },
                             leading: CircleAvatar(
                               radius: 18,

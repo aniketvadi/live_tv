@@ -35,71 +35,78 @@ class _LanguageScreenState extends State<LanguageScreen> {
         ),
       ),
       bottomNavigationBar: AdHelper.bannerAdWidget(),
-      body: Container(
-        padding: const EdgeInsets.all(8),
-        decoration: const BoxDecoration(
-            gradient: LinearGradient(
-          colors: [
-            Color.fromARGB(255, 61, 57, 82),
-            Color.fromARGB(255, 43, 40, 68),
-          ],
-        )),
-        child: Obx(() => controller.isLoading.value
-            ? const ListLoading()
-            : controller.languageList.isEmpty
-                ? const NoDatFound()
-                : GridView.builder(
-                    itemCount: controller.languageList.length,
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            crossAxisSpacing: 3.0,
-                            mainAxisSpacing: 5.0,
-                            childAspectRatio: 1.2),
-                    itemBuilder: (context, index) {
-                      var element = controller.languageList[index];
-                      return Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Material(
-                          color: AppColor.primary,
-                          borderRadius: BorderRadius.circular(10),
-                          elevation: 3.0,
-                          clipBehavior: Clip.antiAlias,
-                          child: InkWell(
-                            onTap: () {
-                              controller.getChannelBylanguage(lang: element);
-                              try {
-                                AdHelper.showIntersrtitialAd();
-                                Navigator.pushNamed(
-                                    context, AppRoutes.channelScreen);
-                              } catch (e) {
-                                Navigator.pushNamed(
-                                    context, AppRoutes.channelScreen);
-                              }
-                            },
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                CircleAvatar(
-                                    radius: 40,
-                                    // backgroundColor:
-                                    //     Color.fromARGB(255, 13, 12, 29),
-                                    child: Text(
-                                      element[0],
-                                      style: Font.title1(),
-                                    )),
-                                Text(
-                                  element,
-                                  style: Font.text(
-                                      size: 18, weight: FontWeight.bold),
-                                )
-                              ],
+      body: WillPopScope(
+        onWillPop: () async {
+          AdHelper.showIntersrtitialAd();
+          return true;
+        },
+        child: Container(
+          padding: const EdgeInsets.all(8),
+          decoration: const BoxDecoration(
+              gradient: LinearGradient(
+            colors: [
+              Color.fromARGB(255, 61, 57, 82),
+              Color.fromARGB(255, 43, 40, 68),
+            ],
+          )),
+          child: Obx(() => controller.isLoading.value
+              ? const ListLoading()
+              : controller.languageList.isEmpty
+                  ? const NoDatFound()
+                  : GridView.builder(
+                      itemCount: controller.languageList.length,
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              crossAxisSpacing: 3.0,
+                              mainAxisSpacing: 5.0,
+                              childAspectRatio: 1.2),
+                      itemBuilder: (context, index) {
+                        var element = controller.languageList[index];
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Material(
+                            color: AppColor.primary,
+                            borderRadius: BorderRadius.circular(10),
+                            elevation: 3.0,
+                            clipBehavior: Clip.antiAlias,
+                            child: InkWell(
+                              onTap: () {
+                                controller.getChannelBylanguage(lang: element);
+                                try {
+                                  AdHelper.showIntersrtitialAd();
+                                  Navigator.pushNamed(
+                                      context, AppRoutes.channelScreen);
+                                } catch (e) {
+                                  Navigator.pushNamed(
+                                      context, AppRoutes.channelScreen);
+                                }
+                              },
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  CircleAvatar(
+                                      radius: 40,
+                                      // backgroundColor:
+                                      //     Color.fromARGB(255, 13, 12, 29),
+                                      child: Text(
+                                        element[0],
+                                        style: Font.title1(),
+                                      )),
+                                  Text(
+                                    element,
+                                    style: Font.text(
+                                        size: 18, weight: FontWeight.bold),
+                                  )
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                      );
-                    },
-                  )),
+                        );
+                      },
+                    )),
+        ),
       ),
     );
   }

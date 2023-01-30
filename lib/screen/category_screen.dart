@@ -36,73 +36,85 @@ class _CategoryScreenState extends State<CategoryScreen> {
         ),
       ),
       bottomNavigationBar: AdHelper.bannerAdWidget(),
-      body: Container(
-        padding: const EdgeInsets.all(8),
-        decoration: const BoxDecoration(
-            gradient: LinearGradient(
-          colors: [
-            Color.fromARGB(255, 61, 57, 82),
-            Color.fromARGB(255, 43, 40, 68),
-          ],
-        )),
-        child: Obx(
-          () => controller.isLoading.value
-              ? const ListLoading()
-              : controller.categoryList.isEmpty
-                  ? const NoDatFound()
-                  : ListView.builder(
-                      itemCount: controller.categoryList.length,
-                      itemBuilder: (context, index) {
-                        var element = controller.categoryList[index];
-                        return Container(
-                          margin: const EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 12),
-                          padding: const EdgeInsets.all(4),
-                          decoration: BoxDecoration(
-                              color: AppColor.primary,
-                              borderRadius: BorderRadius.circular(10),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.shade300,
-                                  blurRadius: 2,
-                                  spreadRadius: -1,
-                                )
-                              ]),
-                          child: ListTile(
-                            onTap: () {
-                              try {
-                                AdHelper.showIntersrtitialAd();
-                                Navigator.pushNamed(
-                                    context, AppRoutes.languageScreen);
-                              } catch (e) {
-                                Navigator.pushNamed(
-                                    context, AppRoutes.languageScreen);
-                              }
-                            },
-                            leading: CircleAvatar(
-                              radius: 18,
-                              child: Text(
-                                element[0],
-                                style: Font.subTitle2(),
+      body: WillPopScope(
+        onWillPop: () async {
+          AdHelper.showIntersrtitialAd();
+          return true;
+        },
+        child: Container(
+          padding: const EdgeInsets.all(8),
+          decoration: const BoxDecoration(
+              gradient: LinearGradient(
+            colors: [
+              Color.fromARGB(255, 61, 57, 82),
+              Color.fromARGB(255, 43, 40, 68),
+            ],
+          )),
+          child: Obx(
+            () => controller.isLoading.value
+                ? const ListLoading()
+                : controller.categoryList.isEmpty
+                    ? const NoDatFound()
+                    : ListView.separated(
+                        itemCount: controller.categoryList.length,
+                        separatorBuilder: (context, index) {
+                          var element = controller.categoryList[index];
+                          return Container(
+                            margin: const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 12),
+                            padding: const EdgeInsets.all(4),
+                            decoration: BoxDecoration(
+                                color: AppColor.primary,
+                                borderRadius: BorderRadius.circular(10),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.shade300,
+                                    blurRadius: 2,
+                                    spreadRadius: -1,
+                                  )
+                                ]),
+                            child: ListTile(
+                              onTap: () {
+                                try {
+                                  AdHelper.showIntersrtitialAd();
+                                  Navigator.pushNamed(
+                                      context, AppRoutes.languageScreen);
+                                } catch (e) {
+                                  Navigator.pushNamed(
+                                      context, AppRoutes.languageScreen);
+                                }
+                              },
+                              leading: CircleAvatar(
+                                radius: 18,
+                                child: Text(
+                                  element[0],
+                                  style: Font.subTitle2(),
+                                ),
+                              ),
+                              title: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 16),
+                                child: Text(
+                                  element,
+                                  style: Font.subTitle1(),
+                                ),
+                              ),
+                              trailing: Icon(
+                                Icons.navigate_next,
+                                color: AppColor.white,
+                                size: 26,
                               ),
                             ),
-                            title: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 16),
-                              child: Text(
-                                element,
-                                style: Font.subTitle1(),
-                              ),
-                            ),
-                            trailing: Icon(
-                              Icons.navigate_next,
-                              color: AppColor.white,
-                              size: 26,
-                            ),
-                          ),
-                        );
-                      },
-                    ),
+                          );
+                        },
+                        itemBuilder: (context, index) {
+                          if (index % 3 == 0) {
+                            return AdHelper.bannerAdWidget();
+                          }
+                          return SizedBox();
+                        },
+                      ),
+          ),
         ),
       ),
     );

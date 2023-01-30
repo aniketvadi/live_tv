@@ -1,5 +1,7 @@
 // ignore_for_file: depend_on_referenced_packages
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:live_tv/constant/app_colors.dart';
@@ -19,6 +21,14 @@ class HomePageScreen extends StatefulWidget {
 }
 
 class _HomePageScreenState extends State<HomePageScreen> {
+  @override
+  void initState() {
+    super.initState();
+    Timer(Duration(seconds: 3), () {
+      setState(() {});
+    });
+  }
+
   _urlLauncher(String link) async {
     Uri url = Uri.parse(link);
     if (await canLaunchUrl(url)) {
@@ -52,6 +62,10 @@ class _HomePageScreenState extends State<HomePageScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
+              AdHelper.nativeAdWidget(),
+              SizedBox(
+                height: 50,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [

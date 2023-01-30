@@ -37,15 +37,16 @@ class AdHelper {
       interstitialId = adIDList['inter'];
       rewardedId = adIDList['rewarded'];
       interstialCount = int.parse(adDataList.first['ad_count']);
-      print(adDataList.first['ad_types']);
-      initializeAllParameter();
+      print('current ad platform is - ${adDataList.first['ad_types']}');
+      await initializeAllParameter();
     } else {
       print('something went wrong');
     }
   }
 
-  static initializeAllParameter() async {
-    if (adDataList.first['ad_types'] == 'adx') {
+  static Future<void> initializeAllParameter() async {
+    if (adDataList.first['ad_types'] == 'adx' ||
+        adDataList.first['ad_types'] == 'admob') {
       isGoogleAdmob = true;
     } else if (adDataList.first['ad_types'] == 'applovin') {
       isAppLovin = true;
@@ -64,7 +65,6 @@ class AdHelper {
     if (isAppLovin == true) {
       Map? sdkConfiguration = await AppLovinMAX.initialize(
           'zcTU2ZtqC3uleiZxA3uW8N1yt_CLOieJ8NcKwKt7gMsw1_S40uvbANLtB9KWgBJONFv9k953SAuVnDSdWsxEqb');
-      print('AppLovin SDK Initialize succesfully');
       initializeApplovinInterstitialAds();
       initializeRewardedAds();
     }
@@ -172,9 +172,8 @@ class AdHelper {
               height: bannerAd!.size.height.toDouble(),
               width: bannerAd!.size.width.toDouble(),
               clipBehavior: Clip.antiAlias,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12)
-              ),
+              decoration:
+                  BoxDecoration(borderRadius: BorderRadius.circular(12)),
               child: AdWidget(
                 ad: bannerAd!,
                 key: UniqueKey(),

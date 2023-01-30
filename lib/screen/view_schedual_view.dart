@@ -29,27 +29,33 @@ class _SchedualViewState extends State<SchedualView> {
         ),
       ),
       bottomNavigationBar: AdHelper.bannerAdWidget(),
-      body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-        decoration: const BoxDecoration(
-            gradient: LinearGradient(
-          colors: [
-            Color.fromARGB(255, 61, 57, 82),
-            Color.fromARGB(255, 43, 40, 68),
-          ],
-        )),
-        child: Obx(
-          () => controller.isLoading.value
-              ? const ListLoading()
-              : controller.schedualList.isEmpty
-                  ? const NoDatFound()
-                  : SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          timeTableWidget(context),
-                        ],
+      body: WillPopScope(
+        onWillPop: () async {
+          AdHelper.showIntersrtitialAd();
+          return true;
+        },
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+          decoration: const BoxDecoration(
+              gradient: LinearGradient(
+            colors: [
+              Color.fromARGB(255, 61, 57, 82),
+              Color.fromARGB(255, 43, 40, 68),
+            ],
+          )),
+          child: Obx(
+            () => controller.isLoading.value
+                ? const ListLoading()
+                : controller.schedualList.isEmpty
+                    ? const NoDatFound()
+                    : SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            timeTableWidget(context),
+                          ],
+                        ),
                       ),
-                    ),
+          ),
         ),
       ),
     );

@@ -34,76 +34,87 @@ class ChannelScreenState extends State<ChannelScreen> {
           style: Font.title2(),
         ),
       ),
-        bottomNavigationBar: AdHelper.bannerAdWidget(),
-      body: Container(
-        padding: const EdgeInsets.all(8),
-        decoration: const BoxDecoration(
-            gradient: LinearGradient(
-          colors: [
-            Color.fromARGB(255, 61, 57, 82),
-            Color.fromARGB(255, 43, 40, 68),
-          ],
-        )),
-        child: Obx(
-          () => controller.isLoading.value
-              ?const ListLoading()
-              : controller.channelList.isEmpty
-                  ? const NoDatFound()
-                  : ListView.builder(
-                      itemCount: controller.channelList.length,
-                      itemBuilder: (context, index) {
-                        var element = controller.channelList[index];
-                        return Container(
-                          margin: const EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 12),
-                          padding: const EdgeInsets.all(4),
-                          decoration: BoxDecoration(
-                              color: AppColor.primary,
-                              borderRadius: BorderRadius.circular(10),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.shade300,
-                                  blurRadius: 2,
-                                  spreadRadius: -1,
-                                )
-                              ]),
-                          child: ListTile(
-                            onTap: () {
-                              controller.getSchedual(channel: element);
-                               try {
-                                AdHelper.showIntersrtitialAd();
-                               Navigator.pushNamed(
-                                  context, AppRoutes.schedualScreen);
-                              } catch (e) {
-                                Navigator.pushNamed(
-                                  context, AppRoutes.schedualScreen);
-                              }
-                              
-                            },
-                            leading: CircleAvatar(
-                              radius: 18,
-                              child: Text(
-                                element[0],
-                                style: Font.subTitle2(),
+      bottomNavigationBar: AdHelper.bannerAdWidget(),
+      body: WillPopScope(
+        onWillPop: () async {
+          AdHelper.showIntersrtitialAd();
+          return true;
+        },
+        child: Container(
+          padding: const EdgeInsets.all(8),
+          decoration: const BoxDecoration(
+              gradient: LinearGradient(
+            colors: [
+              Color.fromARGB(255, 61, 57, 82),
+              Color.fromARGB(255, 43, 40, 68),
+            ],
+          )),
+          child: Obx(
+            () => controller.isLoading.value
+                ? const ListLoading()
+                : controller.channelList.isEmpty
+                    ? const NoDatFound()
+                    : ListView.separated(
+                        itemCount: controller.channelList.length,
+                        separatorBuilder: (context, index) {
+                          var element = controller.channelList[index];
+                          return Container(
+                            margin: const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 12),
+                            padding: const EdgeInsets.all(4),
+                            decoration: BoxDecoration(
+                                color: AppColor.primary,
+                                borderRadius: BorderRadius.circular(10),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.shade300,
+                                    blurRadius: 2,
+                                    spreadRadius: -1,
+                                  )
+                                ]),
+                            child: ListTile(
+                              onTap: () {
+                                controller.getSchedual(channel: element);
+                                try {
+                                  AdHelper.showRewardedAd();
+                                  Navigator.pushNamed(
+                                      context, AppRoutes.schedualScreen);
+                                } catch (e) {
+                                  Navigator.pushNamed(
+                                      context, AppRoutes.schedualScreen);
+                                }
+                              },
+                              leading: CircleAvatar(
+                                radius: 18,
+                                child: Text(
+                                  element[0],
+                                  style: Font.subTitle2(),
+                                ),
+                              ),
+                              title: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 16),
+                                child: Text(
+                                  element,
+                                  style: Font.subTitle1(),
+                                ),
+                              ),
+                              trailing: Icon(
+                                Icons.navigate_next,
+                                color: AppColor.white,
+                                size: 26,
                               ),
                             ),
-                            title: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 16),
-                              child: Text(
-                                element,
-                                style: Font.subTitle1(),
-                              ),
-                            ),
-                            trailing: Icon(
-                              Icons.navigate_next,
-                              color: AppColor.white,
-                              size: 26,
-                            ),
-                          ),
-                        );
-                      },
-                    ),
+                          );
+                        },
+                        itemBuilder: (context, index) {
+                          if(index % 3 == 0){
+                            return AdHelper.bannerAdWidget();
+                          }
+                          return SizedBox();
+                        },
+                      ),
+          ),
         ),
       ),
     );

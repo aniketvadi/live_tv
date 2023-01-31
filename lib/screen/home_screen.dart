@@ -181,7 +181,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
   _showPrivacyDialog() async {
     Get.defaultDialog(
       title: 'Privacy Policy',
-      middleText: AppUrl.Privacy,
+      middleText: AppUrl.privacy,
       middleTextStyle: Font.subTitle3(color: AppColor.black),
       textConfirm: 'OK',
       confirmTextColor: AppColor.white,

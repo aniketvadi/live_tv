@@ -87,17 +87,17 @@ class _LanguageScreenState extends State<LanguageScreen> {
                                     MainAxisAlignment.spaceEvenly,
                                 children: [
                                   CircleAvatar(
-                                      radius: 40,
+                                      radius: 35,
                                       // backgroundColor:
                                       //     Color.fromARGB(255, 13, 12, 29),
                                       child: Text(
                                         element[0],
-                                        style: Font.title1(),
+                                        style: Font.title1(color: Colors.blue),
                                       )),
                                   Text(
                                     element,
                                     style: Font.text(
-                                        size: 18, weight: FontWeight.bold),
+                                        size: 17, weight: FontWeight.bold),
                                   )
                                 ],
                               ),

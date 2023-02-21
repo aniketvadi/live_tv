@@ -88,7 +88,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                 radius: 18,
                                 child: Text(
                                   element[0],
-                                  style: Font.subTitle2(),
+                                  style: Font.subTitle2(color: Colors.blue),
                                 ),
                               ),
                               title: Padding(

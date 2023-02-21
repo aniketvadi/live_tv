@@ -88,7 +88,7 @@ class ChannelScreenState extends State<ChannelScreen> {
                                 radius: 18,
                                 child: Text(
                                   element[0],
-                                  style: Font.subTitle2(),
+                                  style: Font.subTitle2(color: Colors.blue),
                                 ),
                               ),
                               title: Padding(

@@ -24,7 +24,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 3), () {
+    Timer(Duration(seconds: 4), () {
       setState(() {});
     });
   }
@@ -76,19 +76,19 @@ class _HomePageScreenState extends State<HomePageScreen> {
                       },
                       icon: Icon(
                         Icons.share,
-                        size: 40,
-                        color: AppColor.white,
+                        size: 30,
+                        color: Colors.orange,
                       )),
-                  commonButton(
-                      title: 'Rate',
-                      onTap: () async {
-                        _urlLauncher(AppUrl.appLink);
-                      },
-                      icon: Icon(
-                        Icons.star,
-                        size: 40,
-                        color: AppColor.white,
-                      )),
+                  // commonButton(
+                  //     title: 'Rate',
+                  //     onTap: () async {
+                  //       _urlLauncher(AppUrl.appLink);
+                  //     },
+                  //     icon: Icon(
+                  //       Icons.star,
+                  //       size: 30,
+                  //       color: AppColor.white,
+                  //     )),
                   commonButton(
                       title: 'Privacy',
                       onTap: () {
@@ -96,8 +96,8 @@ class _HomePageScreenState extends State<HomePageScreen> {
                       },
                       icon: Icon(
                         Icons.security,
-                        size: 40,
-                        color: AppColor.white,
+                        size: 30,
+                        color: Colors.purple,
                       )),
                 ],
               ),
@@ -151,7 +151,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
       required Widget icon,
       required Function() onTap}) {
     return Material(
-      color: AppColor.primary,
+      // color: AppColor.primary,
       clipBehavior: Clip.antiAlias,
       borderRadius: BorderRadius.circular(8),
       elevation: 3,
@@ -169,7 +169,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
               icon,
               Text(
                 title,
-                style: Font.subTitle1(),
+                style: Font.subTitle2(color: AppColor.black),
               )
             ],
           ),
@@ -207,7 +207,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
               },
               child: Text(
                 'Yes',
-                style: Font.button1(),
+                style: Font.button1(color: Colors.red),
               )),
           ElevatedButton(
               onPressed: () {
@@ -215,7 +215,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
               },
               child: Text(
                 'No',
-                style: Font.button1(),
+                style: Font.button1(color: Colors.teal),
               ))
         ],
         content: Column(

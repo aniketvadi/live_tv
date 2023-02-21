@@ -32,7 +32,9 @@ class MyApp extends StatelessWidget {
       title: 'Live TV',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blueGrey,
+        // primarySwatch: Colors.blueGrey,
+        useMaterial3: true,
+        colorSchemeSeed: Colors.blueGrey,
         // textTheme: GoogleFonts.latoTextTheme(
         //     Theme
         //         .of(context)
@@ -42,6 +44,7 @@ class MyApp extends StatelessWidget {
         appBarTheme: AppBarTheme(
           backgroundColor: AppColor.primary,
           centerTitle: true,
+          iconTheme: IconThemeData(color: Colors.white),
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
               bottomLeft: Radius.circular(16),

@@ -2,12 +2,15 @@ import 'dart:convert';
 
 import 'package:applovin_max/applovin_max.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:http/http.dart' as http;
+import 'package:live_tv/utils/app_dialog.dart';
 
 class AdHelper {
   static bool isBannerAdLoaded = false;
   static bool isNativeAdLoaded = false;
+
   // static List<AdmobModal> admobDataList = [];
   // static List<ApplovinAdModal> applovinDataList = [];
   static List adDataList = [];

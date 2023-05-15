@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:live_tv/config/app_routes.dart';
 import 'package:live_tv/constant/app_colors.dart';
 import 'package:live_tv/constant/app_font.dart';
-import 'package:live_tv/constant/app_routes.dart';
 import 'package:live_tv/constant/img_path.dart';
 import 'package:live_tv/services/mobile_ad_helper.dart';
 
@@ -29,9 +30,12 @@ class _SplashScreenState extends State<SplashScreen>
         CurvedAnimation(parent: controller, curve: Curves.fastOutSlowIn);
     controller.addListener(() async {
       if (controller.isCompleted) {
-        await AdHelper.initializeAdMobDataAPI();
-        Navigator.pushNamedAndRemoveUntil(
-            context, AppRoutes.homeScreen, (route) => false);
+        try {
+          await AdHelper.initializeAdMobDataAPI();
+          Get.offAndToNamed(AppRoutes.homeScreen);
+        } catch (err) {
+          Get.offAndToNamed(AppRoutes.homeScreen);
+        }
       }
     });
     controller.forward();

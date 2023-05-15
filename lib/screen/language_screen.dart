@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:live_tv/config/app_routes.dart';
 import 'package:live_tv/constant/app_colors.dart';
 import 'package:live_tv/constant/app_font.dart';
-import 'package:live_tv/constant/app_routes.dart';
 import 'package:live_tv/controller/fire_base_controller.dart';
 import 'package:live_tv/custom_widget/list_loading.dart';
 import 'package:live_tv/custom_widget/no_data_found.dart';
@@ -75,11 +75,9 @@ class _LanguageScreenState extends State<LanguageScreen> {
                                 controller.getChannelBylanguage(lang: element);
                                 try {
                                   AdHelper.showIntersrtitialAd();
-                                  Navigator.pushNamed(
-                                      context, AppRoutes.channelScreen);
+                                  Get.toNamed(AppRoutes.channelScreen);
                                 } catch (e) {
-                                  Navigator.pushNamed(
-                                      context, AppRoutes.channelScreen);
+                                  Get.toNamed(AppRoutes.channelScreen);
                                 }
                               },
                               child: Column(

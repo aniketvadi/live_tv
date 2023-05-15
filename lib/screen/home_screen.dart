@@ -4,14 +4,13 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:live_tv/config/app_routes.dart';
 import 'package:live_tv/constant/app_colors.dart';
 import 'package:live_tv/constant/app_constant.dart';
 import 'package:live_tv/constant/app_font.dart';
 import 'package:get/get.dart';
-import 'package:live_tv/constant/app_routes.dart';
 import 'package:live_tv/services/mobile_ad_helper.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class HomePageScreen extends StatefulWidget {
   const HomePageScreen({Key? key}) : super(key: key);
@@ -24,19 +23,11 @@ class _HomePageScreenState extends State<HomePageScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 4), () {
+    Timer(const Duration(seconds: 4), () {
       setState(() {});
     });
   }
 
-  _urlLauncher(String link) async {
-    Uri url = Uri.parse(link);
-    if (await canLaunchUrl(url)) {
-      await launchUrl(url);
-    } else {
-      throw 'can not launch $url';
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +54,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               AdHelper.nativeAdWidget(),
-              SizedBox(
+              const SizedBox(
                 height: 50,
               ),
               Row(
@@ -74,7 +65,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                       onTap: () async {
                         await Share.share(AppUrl.appLink);
                       },
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.share,
                         size: 30,
                         color: Colors.orange,
@@ -94,7 +85,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                       onTap: () {
                         _showPrivacyDialog();
                       },
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.security,
                         size: 30,
                         color: Colors.purple,
@@ -114,9 +105,9 @@ class _HomePageScreenState extends State<HomePageScreen> {
                   onTap: () async {
                     try {
                       AdHelper.showIntersrtitialAd();
-                      Navigator.pushNamed(context, AppRoutes.categoryScreen);
+                      Get.toNamed(AppRoutes.categoryScreen);
                     } catch (e) {
-                      Navigator.pushNamed(context, AppRoutes.categoryScreen);
+                      Get.toNamed(AppRoutes.categoryScreen);
                     }
 
                     // Navigator.push(

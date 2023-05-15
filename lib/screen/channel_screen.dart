@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:live_tv/config/app_routes.dart';
 import 'package:live_tv/constant/app_colors.dart';
 import 'package:live_tv/constant/app_font.dart';
-import 'package:live_tv/constant/app_routes.dart';
 import 'package:live_tv/controller/fire_base_controller.dart';
 import 'package:live_tv/custom_widget/list_loading.dart';
 import 'package:live_tv/custom_widget/no_data_found.dart';
@@ -77,11 +77,9 @@ class ChannelScreenState extends State<ChannelScreen> {
                                 controller.getSchedual(channel: element);
                                 try {
                                   AdHelper.showRewardedAd();
-                                  Navigator.pushNamed(
-                                      context, AppRoutes.schedualScreen);
+                                  Get.toNamed(AppRoutes.schedualScreen);
                                 } catch (e) {
-                                  Navigator.pushNamed(
-                                      context, AppRoutes.schedualScreen);
+                                  Get.toNamed(AppRoutes.schedualScreen);
                                 }
                               },
                               leading: CircleAvatar(
@@ -108,10 +106,10 @@ class ChannelScreenState extends State<ChannelScreen> {
                           );
                         },
                         itemBuilder: (context, index) {
-                          if(index % 3 == 0){
+                          if (index % 3 == 0) {
                             return AdHelper.bannerAdWidget();
                           }
-                          return SizedBox();
+                          return const SizedBox();
                         },
                       ),
           ),
